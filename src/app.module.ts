@@ -5,7 +5,8 @@ import { AppConfigurationModule } from './infrastructure/configuration/app-confi
 import { AppConfigurationService } from './infrastructure/configuration/app-configuration.service';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { StreamerModule } from './streamer/streamer.module';
+import { ConfigModule } from './v1/config/config.module';
+import { StreamerModule } from './v1/streamer/streamer.module';
 
 @Module({
   imports: [
@@ -24,10 +25,15 @@ import { StreamerModule } from './streamer/streamer.module';
     }),
     RouterModule.register([
       {
-        path: 'twitch-streamers',
+        path: 'v1/config',
+        module: ConfigModule,
+      },
+      {
+        path: 'v1/twitch-streamers',
         module: StreamerModule,
       },
     ]),
+    ConfigModule,
     StreamerModule,
   ],
   controllers: [AppController],
