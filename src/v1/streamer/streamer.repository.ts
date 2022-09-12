@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { StreamerPayload, Streamer } from './streamer';
@@ -30,7 +30,9 @@ export class StreamerRepository {
   }: StreamerPayload): Promise<Streamer> {
     const existingUser = await this._streamerModel.findOne({ username });
     if (existingUser) {
-      throw new Error(`User with username "${username}" already exists.`);
+      throw new BadRequestException(
+        `User with username "${username}" already exists.`,
+      );
     }
 
     const createdAt = new Date().toISOString();
@@ -57,7 +59,9 @@ export class StreamerRepository {
   }: StreamerPayload): Promise<Streamer> {
     const existingUser = await this._streamerModel.findOne({ username });
     if (!existingUser) {
-      throw new Error(`User with username "${username}" doesn't exists.`);
+      throw new BadRequestException(
+        `User with username ${username} doesn't exists.`,
+      );
     }
 
     const updatedAt = new Date().toISOString();

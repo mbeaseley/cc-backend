@@ -15,11 +15,11 @@ export class ConfigRepository {
    * @param {string}
    * @returns {Promise<Config | Config[]>}
    */
-  async get(guildId?: string): Promise<Config | Config[]> {
-    if (!guildId) {
+  async get(discordGuildId?: string): Promise<Config | Config[]> {
+    if (!discordGuildId) {
       return await this._configModel.find();
     }
 
-    return await this._configModel.findOne();
+    return await this._configModel.findOne({ discordGuildId });
   }
 }

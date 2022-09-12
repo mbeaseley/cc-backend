@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from './v1/config/config.module';
 import { StreamerModule } from './v1/streamer/streamer.module';
+import { RulesModule } from './v1/rules/rules.module';
 
 @Module({
   imports: [
@@ -29,11 +30,16 @@ import { StreamerModule } from './v1/streamer/streamer.module';
         module: ConfigModule,
       },
       {
+        path: 'v1/guild-rules',
+        module: RulesModule,
+      },
+      {
         path: 'v1/twitch-streamers',
         module: StreamerModule,
       },
     ]),
     ConfigModule,
+    RulesModule,
     StreamerModule,
   ],
   controllers: [AppController],
