@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from './v1/config/config.module';
 import { StreamerModule } from './v1/streamer/streamer.module';
 import { RulesModule } from './v1/rules/rules.module';
+import { DbdModule } from './v1/dbd/dbd.module';
 
 @Module({
   imports: [
@@ -37,10 +38,15 @@ import { RulesModule } from './v1/rules/rules.module';
         path: 'v1/twitch-streamers',
         module: StreamerModule,
       },
+      {
+        path: 'v1/dbd',
+        module: DbdModule,
+      },
     ]),
     ConfigModule,
     RulesModule,
     StreamerModule,
+    DbdModule,
   ],
   controllers: [AppController],
   providers: [AppService],
